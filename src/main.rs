@@ -16,18 +16,18 @@ struct Args {
     #[arg(long, env = "YD_APP_ID", default_value_t = String::new())]
     yd_id: String,
 
-    /// Your Youdao App Secret
-    #[arg(long, env = "YD_APP_SECRET", default_value_t = String::new())]
+    /// Your Youdao App Key
+    #[arg(long, env = "YD_APP_KEY", default_value_t = String::new())]
     yd_key: String,
 }
 
-async fn generate_sign(app_id: &str, app_secret: &str, q: &str, salt: &str, curtime: &str) -> String {
+async fn generate_sign(yd_id: &str, yd_key: &str, q: &str, salt: &str, curtime: &str) -> String {
     let input = if q.len() > 20 {
         format!("{}{}{}", &q[..10], q.len(), &q[q.len()-10..])
     } else {
         q.to_string()
     };
-    let sign_str = format!("{}{}{}{}{}", app_id, input, salt, curtime, app_secret);
+    let sign_str = format!("{}{}{}{}{}", yd_id, input, salt, curtime, yd_key);
     let mut hasher = Sha256::new();
     hasher.update(sign_str.as_bytes());
     format!("{:x}", hasher.finalize())
@@ -67,7 +67,7 @@ async fn main() {
     let args = Args::parse();
 
     if args.yd_id.is_empty() || args.yd_key.is_empty() {
-        eprintln!("Error: YD_APP_ID and YD_APP_SECRET environment variables must be set.");
+        eprintln!("Error: YD_APP_ID and YD_APP_KEY environment variables must be set.");
         return;
     }
 
