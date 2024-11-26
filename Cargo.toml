@@ -2,5 +2,9 @@
 name = "yd"
 version = "0.1.0"
 edition = "2021"
+authors = ["Yorigami Chitose <YorigamiChitose@outlook.com>"]
+homepage = "https://github.com/YorigamiChitose/yd"
+repository = "https://github.com/YorigamiChitose/yd"
+license = "MIT"
 
 [dependencies]
