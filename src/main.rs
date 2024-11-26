@@ -2,7 +2,7 @@ use reqwest::Client;
 use serde_json::json;
 use sha2::{Sha256, Digest};
 use uuid::Uuid;
-use tokio::time::Instant;
+use std::time::{SystemTime, UNIX_EPOCH};
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -21,7 +21,7 @@ struct Args {
     yd_key: String,
 }
 
-fn generate_sign(app_id: &str, app_secret: &str, q: &str, salt: &str, curtime: &str) -> String {
+async fn generate_sign(app_id: &str, app_secret: &str, q: &str, salt: &str, curtime: &str) -> String {
     let input = if q.len() > 20 {
         format!("{}{}{}", &q[..10], q.len(), &q[q.len()-10..])
     } else {
@@ -35,8 +35,8 @@ fn generate_sign(app_id: &str, app_secret: &str, q: &str, salt: &str, curtime: &
 
 async fn translate(yd_id: &str, yd_key: &str, q: &str) -> Result<String, Box<dyn std::error::Error>> {
     let salt = Uuid::new_v4().to_string();
-    let curtime = Instant::now().elapsed().as_secs().to_string();
-    let sign = generate_sign(yd_id, yd_key, q, &salt, &curtime);
+    let curtime = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs().to_string();
+    let sign = generate_sign(yd_id, yd_key, q, &salt, &curtime).await;
 
     let client = Client::new();
     let response = client.post("https://openapi.youdao.com/api")
