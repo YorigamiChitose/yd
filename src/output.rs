@@ -6,7 +6,7 @@ pub fn handle_error(result: Result<String, TranslationError>) -> i32 {
         Ok(s) => {
             println!("{}", s);
             0
-        },
+        }
         Err(e) => {
             eprintln!("{}", e);
             1

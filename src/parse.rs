@@ -6,7 +6,7 @@ pub struct Args {
     /// Text to translate
     #[arg(index = 1, value_name = "text")]
     pub text: String,
-    
+
     /// Your Youdao App ID
     #[arg(long, env = "YD_APP_ID", default_value_t = String::new())]
     pub yd_id: String,
