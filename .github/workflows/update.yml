@@ -15,6 +15,8 @@ jobs:
       - name: Set up Rust
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          rustup default stable
+          rustup update
           echo "export PATH=\"$HOME/.cargo/bin:$PATH\"" >> $GITHUB_ENV
 
       - name: Install cargo-edit
