@@ -1,7 +1,7 @@
 [package]
 name = "yd"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 authors = ["Yorigami Chitose <YorigamiChitose@outlook.com>"]
 homepage = "https://github.com/YorigamiChitose/yd"
 repository = "https://github.com/YorigamiChitose/yd"
