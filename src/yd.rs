@@ -1,4 +1,3 @@
-// translate.rs
 use reqwest::Client;
 use serde_json::json;
 use sha2::{Digest, Sha256};

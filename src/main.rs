@@ -1,4 +1,3 @@
-// main.rs
 mod output;
 mod parse;
 mod yd;
