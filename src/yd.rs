@@ -36,8 +36,9 @@ pub async fn generate_sign(
     salt: &str,
     curtime: &str,
 ) -> String {
-    let input = if q.len() > 20 {
-        format!("{}{}{}", &q[..10], q.len(), &q[q.len() - 10..])
+    let input = if q.chars().count() > 20 {
+        let chars: Vec<char> = q.chars().collect();
+        format!("{}{}{}", chars[..10].iter().collect::<String>(), chars.len(), chars[chars.len()-10..].iter().collect::<String>())
     } else {
         q.to_string()
     };
