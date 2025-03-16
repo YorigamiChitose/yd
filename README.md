@@ -11,46 +11,59 @@ YD 是一个基于 Rust 的文本翻译软件，使用有道翻译 API 进行翻
 ## 安装
 
 1. 克隆仓库：
+
    ```bash
    git clone https://github.com/YorigamiChitose/yd.git
    ```
 
 2. 进入项目目录：
+
    ```bash
    cd yd
    ```
 
 3. 构建项目：
+
    ```bash
    cargo build --release
    ```
 
-4. 运行程序：
+4. 将生成的可执行文件添加到 PATH 中：
+
+   ~~下面的指令仅供参考，请根据实际情况调整~~
+
    ```bash
-   cargo run --release
+   export PATH=$PATH:$(pwd)/target/release
    ```
 
 ## 使用方法
 
-1. 获取有道翻译 API 的 `YD_APP_ID` 和 `YD_APP_KEY`。
+1. 获取[有道翻译 API ](https://ai.youdao.com/doc.s#guide)的 `YD_APP_ID` 和 `YD_APP_KEY`。
+
 2. 在环境变量中添加以下内容：
+
    ```env
-   YD_APP_ID=your_app_key
-   YD_APP_KEY=your_app_secret
+   YD_APP_ID=your_app_id
+   YD_APP_KEY=your_app_key
    ```
 
 3. 运行程序并输入要翻译的文本：
+
    ```bash
-   cargo run --release -- "要翻译的文本"
+   yd "要翻译的文本"
+   ```
+   ```bash
+   echo "要翻译的文本" | yd
    ```
 
 ## 示例
 
 ```bash
-cargo run --release -- "Hello, world!"
+yd "Hello, world!"
 ```
 
 输出：
+
 ```
 你好，世界！
 ```
